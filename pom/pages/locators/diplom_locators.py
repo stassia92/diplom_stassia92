@@ -6,10 +6,10 @@ main_page_footer = (By.CSS_SELECTOR, '#page-footer > div > div')
 ab_testing_page = (By.CSS_SELECTOR, '#content > ul > li:nth-child(1) > a')
 ab_test_var_1_header = (By.CSS_SELECTOR, '#content > div > h3')
 github_btn = (By.CSS_SELECTOR, 'body > div:nth-child(2) > a > img')
-github_author_name = (By.CSS_SELECTOR, '#repository-container-header > '
-                                       'div.d-flex.flex-wrap.flex-justify-end.mb-3.px-3.px-md-4.px-lg-5 >'
-                                       ' div > div > '
-                                       'span.author.flex-self-stretch > a')
+github_name = (By.CSS_SELECTOR, '#repository-container-header > '
+                                'div.d-flex.flex-wrap.flex-justify-end.mb-3.px-3.px-md-4.px-lg-5 >'
+                                ' div > div > '
+                                'span.author.flex-self-stretch > a')
 github_btn_image = (By.TAG_NAME, 'img')
 add_and_remove = (By.CSS_SELECTOR, "#content > ul > li:nth-child(2) > a")
 add_element_btn = (By.CSS_SELECTOR, "#content > div > button")

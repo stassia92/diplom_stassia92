@@ -29,7 +29,7 @@ class DiplomPage(BasePage):
         return self.driver.current_url
 
     def github_author_name_is_displayed(self):
-        return self.find_element(dl.github_author_name).is_displayed()
+        return self.find_element(dl.github_name).is_displayed()
 
     def github_btn_is_displayed(self):
         return self.find_element(dl.github_btn).is_displayed()

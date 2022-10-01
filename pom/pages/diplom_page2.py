@@ -57,14 +57,5 @@ class DiplomPage2(BasePage):
     def login_success_txt(self):
         return self.find_element(dl.login_success).text
 
-    def entry_ad(self):
-        return self.find_element(dl.entry_ad).click()
-
-    def close_entry_ad(self):
-        return self.find_element(dl.ad_close).click()
-
-    def ad_window_is_displayed(self):
-        return self.find_element(dl.ad_win).is_displayed()
-
     def upload_file_click(self):
         return self.find_element(dl.file_upload).click()

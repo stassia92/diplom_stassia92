@@ -250,26 +250,11 @@ def test_17_form_authentication_wrong_password(driver):
     assert "Your password is invalid!" in diplom_page.login_success_txt()
 
 
-@allure.suite('Всплывающая реклама')
-@allure.feature('Проверка на выключение всплывающей рекламы')
-@pytest.mark.usefixtures('text_inside_test')
-def test_18_entry_ad(driver):
-    with allure.step('Открытие главной страницы сайта'):
-        diplom_page = DiplomPage2(driver)
-        diplom_page.open()
-    with allure.step('Открытие страницы с примером Enty Ad'):
-        diplom_page.entry_ad()
-    with allure.step('Выключение всплывающей рекламы'):
-        diplom_page.close_entry_ad()
-        sleep(7)
-    assert diplom_page.ad_window_is_displayed() is False
-
-
 @allure.suite('Добавление файла')
 @allure.feature('Проверка добавления файла на страницу')
 @pytest.mark.usefixtures('text_inside_test')
 @pytest.mark.diplom
-def test_19_file_uploader(driver):
+def test_18_file_uploader(driver):
     with allure.step('Открытие главной страницы сайта'):
         diplom_page = DiplomPage2(driver)
         diplom_page.open()
@@ -284,7 +269,7 @@ def test_19_file_uploader(driver):
 @allure.suite('Отправление данных без файла')
 @allure.feature('Проверка отправления пустых данных')
 @pytest.mark.usefixtures('text_inside_test')
-def test_20_file_uploader(driver):
+def test_19_file_uploader(driver):
     with allure.step('Открытие главной страницы сайта'):
         diplom_page = DiplomPage2(driver)
         diplom_page.open()
@@ -299,7 +284,7 @@ def test_20_file_uploader(driver):
 @allure.suite('Динамическая кнопка удаления чекбокса')
 @allure.feature('Проверка удаления чекбокса со страницы - динамической кнопкой')
 @pytest.mark.usefixtures('text_inside_test')
-def test_21_dynamic_ctrl_remove_checkbox(driver):
+def test_20_dynamic_ctrl_remove_checkbox(driver):
     with allure.step('Открытие главной страницы сайта'):
         diplom_page = DiplomPage3(driver)
         diplom_page.open()
@@ -311,7 +296,7 @@ def test_21_dynamic_ctrl_remove_checkbox(driver):
 @allure.suite('Динамическая кнопка добавления чекбокса')
 @allure.feature('Проверка добавления чекбокса со страницы - динамической кнопкой')
 @pytest.mark.usefixtures('text_inside_test')
-def test_22_dynamic_ctrl_remove_checkbox(driver):
+def test_21_dynamic_ctrl_remove_checkbox(driver):
     with allure.step('Открытие главной страницы сайта'):
         diplom_page = DiplomPage3(driver)
         diplom_page.open()
@@ -325,7 +310,7 @@ def test_22_dynamic_ctrl_remove_checkbox(driver):
 @allure.suite('Динамическая кнопка включения')
 @allure.feature('Проверка включения динамической кнопки')
 @pytest.mark.usefixtures('text_inside_test')
-def test_23_dynamic_ctrl_enable_btn(driver):
+def test_22_dynamic_ctrl_enable_btn(driver):
     with allure.step('Открытие главной страницы сайта'):
         diplom_page = DiplomPage3(driver)
         diplom_page.open()
@@ -337,7 +322,7 @@ def test_23_dynamic_ctrl_enable_btn(driver):
 @allure.suite('Динамическая кнопка выключения')
 @allure.feature('Проверка выключения динамической кнопки')
 @pytest.mark.usefixtures('text_inside_test')
-def test_24_dynamic_ctrl_disable_btn(driver):
+def test_23_dynamic_ctrl_disable_btn(driver):
     with allure.step('Открытие главной страницы сайта'):
         diplom_page = DiplomPage3(driver)
         diplom_page.open()
@@ -352,7 +337,7 @@ def test_24_dynamic_ctrl_disable_btn(driver):
 @allure.suite('Контекстное меню')
 @allure.feature('Проверка на появление алерта после вызова контекстного меню ')
 @pytest.mark.usefixtures('text_inside_test')
-def test_25_context_menu(driver):
+def test_24_context_menu(driver):
     with allure.step('Открытие главной страницы сайта'):
         diplom_page = DiplomPage3(driver)
         diplom_page.open()
@@ -367,7 +352,7 @@ def test_25_context_menu(driver):
 @allure.feature('Проверка наведения курсора на фото получение инфо о нем ')
 @pytest.mark.usefixtures('text_inside_test')
 @pytest.mark.diplom
-def test_26_hover_1(driver):
+def test_25_hover_1(driver):
     with allure.step('Открытие главной страницы сайта'):
         diplom_page = DiplomPage3(driver)
         diplom_page.open()
@@ -381,7 +366,7 @@ def test_26_hover_1(driver):
 @allure.suite('Hover 2')
 @allure.feature('Проверка наведения курсора на фото получение инфо о нем ')
 @pytest.mark.usefixtures('text_inside_test')
-def test_27_hover_2(driver):
+def test_26_hover_2(driver):
     with allure.step('Открытие главной страницы сайта'):
         diplom_page = DiplomPage3(driver)
         diplom_page.open()
@@ -395,7 +380,7 @@ def test_27_hover_2(driver):
 @allure.suite('Hover 3')
 @allure.feature('Проверка наведения курсора на фото получение инфо о нем ')
 @pytest.mark.usefixtures('text_inside_test')
-def test_28_hover_3(driver):
+def test_27_hover_3(driver):
     with allure.step('Открытие главной страницы сайта'):
         diplom_page = DiplomPage3(driver)
         diplom_page.open()
@@ -410,7 +395,7 @@ def test_28_hover_3(driver):
 @allure.feature('Проверка что страница возвращает status code 200 ')
 @pytest.mark.usefixtures('text_inside_test')
 @pytest.mark.diplom
-def test_29_status_code_200(driver):
+def test_28_status_code_200(driver):
     with allure.step('Открытие главной страницы сайта'):
         diplom_page = DiplomPage4(driver)
         diplom_page.open()
@@ -422,7 +407,7 @@ def test_29_status_code_200(driver):
 @allure.suite('Status code 301')
 @allure.feature('Проверка что страница возвращает status code 301 ')
 @pytest.mark.usefixtures('text_inside_test')
-def test_30_status_code_301(driver):
+def test_29_status_code_301(driver):
     with allure.step('Открытие главной страницы сайта'):
         diplom_page = DiplomPage4(driver)
         diplom_page.open()
@@ -434,7 +419,7 @@ def test_30_status_code_301(driver):
 @allure.suite('Status code 404')
 @allure.feature('Проверка что страница возвращает status code 404 ')
 @pytest.mark.usefixtures('text_inside_test')
-def test_31_status_code_404(driver):
+def test_30_status_code_404(driver):
     with allure.step('Открытие главной страницы сайта'):
         diplom_page = DiplomPage4(driver)
         diplom_page.open()
@@ -446,7 +431,7 @@ def test_31_status_code_404(driver):
 @allure.suite('Status code 500')
 @allure.feature('Проверка что страница возвращает status code 500 ')
 @pytest.mark.usefixtures('text_inside_test')
-def test_32_status_code_500(driver):
+def test_31_status_code_500(driver):
     with allure.step('Открытие главной страницы сайта'):
         diplom_page = DiplomPage4(driver)
         diplom_page.open()
@@ -459,7 +444,7 @@ def test_32_status_code_500(driver):
 @allure.feature('Проверка перехода на iframe и отображения старого текста на странице  ')
 @pytest.mark.usefixtures('text_inside_test')
 @pytest.mark.diplom
-def test_33_iframe_check_old_txt(driver):
+def test_32_iframe_check_old_txt(driver):
     with allure.step('Открытие главной страницы сайта'):
         diplom_page = DiplomPage4(driver)
         diplom_page.open()
@@ -475,7 +460,7 @@ def test_33_iframe_check_old_txt(driver):
 @allure.suite('Frame iframe')
 @allure.feature('Изменение текста в iframe и проверка на несовпадение нового текста со старым ')
 @pytest.mark.usefixtures('text_inside_test')
-def test_34_iframe_chech_new_txt(driver):
+def test_33_iframe_chech_new_txt(driver):
     with allure.step('Открытие главной страницы сайта'):
         diplom_page = DiplomPage4(driver)
         diplom_page.open()
@@ -495,7 +480,7 @@ def test_34_iframe_chech_new_txt(driver):
 @allure.suite('Nested frame bottom ')
 @allure.feature('Переход на nested frame bottom и проверка текста внутри него')
 @pytest.mark.usefixtures('text_inside_test')
-def test_35_nested_frame_bottom(driver):
+def test_34_nested_frame_bottom(driver):
     with allure.step('Открытие главной страницы сайта'):
         diplom_page = DiplomPage4(driver)
         diplom_page.open()
@@ -511,7 +496,7 @@ def test_35_nested_frame_bottom(driver):
 @allure.suite('Nested frame left')
 @allure.feature('Переход на nested frame left и проверка текста внутри него')
 @pytest.mark.usefixtures('text_inside_test')
-def test_36_nested_frame_bottom(driver):
+def test_35_nested_frame_bottom(driver):
     with allure.step('Открытие главной страницы сайта'):
         diplom_page = DiplomPage4(driver)
         diplom_page.open()
@@ -527,7 +512,7 @@ def test_36_nested_frame_bottom(driver):
 @allure.suite('Nested frame middle')
 @allure.feature('Переход на nested frame middle и проверка текста внутри него')
 @pytest.mark.usefixtures('text_inside_test')
-def test_37_nested_frame_bottom(driver):
+def test_36_nested_frame_bottom(driver):
     with allure.step('Открытие главной страницы сайта'):
         diplom_page = DiplomPage4(driver)
         diplom_page.open()
@@ -545,7 +530,7 @@ def test_37_nested_frame_bottom(driver):
 @allure.feature('Переход на nested frame right и проверка текста внутри него')
 @pytest.mark.usefixtures('text_inside_test')
 @pytest.mark.diplom
-def test_38_nested_frame_bottom(driver):
+def test_37_nested_frame_bottom(driver):
     with allure.step('Открытие главной страницы сайта'):
         diplom_page = DiplomPage4(driver)
         diplom_page.open()

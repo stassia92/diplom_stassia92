@@ -4,6 +4,9 @@ from selenium.webdriver.common.action_chains import ActionChains
 
 
 class DiplomPage3(BasePage):
+    def __init__(self, driver):
+        super().__init__(driver)
+        self.driver = driver
 
     def open(self):
         return self.driver.get('https://the-internet.herokuapp.com/')
@@ -43,9 +46,9 @@ class DiplomPage3(BasePage):
         return self.find_element(dl.context_menu).click()
 
     def context_menu(self):
-        actionChains = ActionChains(self.driver)
-        elementLocator = self.find_element(dl.right_click_spot)
-        return actionChains.context_click(elementLocator).perform()
+        action = ActionChains(self.driver)
+        element_locator = self.find_element(dl.right_click_spot)
+        return action.context_click(element_locator).perform()
 
     def alert_txt(self):
         return self.driver.switch_to.alert.text
@@ -55,24 +58,24 @@ class DiplomPage3(BasePage):
 
     def move_to_hover_1(self):
         action = ActionChains(self.driver)
-        elementLocator = self.find_element(dl.hover_1)
-        return action.move_to_element(elementLocator).perform()
+        element_locator = self.find_element(dl.hover_1)
+        return action.move_to_element(element_locator).perform()
 
     def hidden_user1_txt(self):
         return self.find_element(dl.hidden_user1_txt).text
 
     def move_to_hover_2(self):
         action = ActionChains(self.driver)
-        elementLocator = self.find_element(dl.hover_2)
-        return action.move_to_element(elementLocator).perform()
+        element_locator = self.find_element(dl.hover_2)
+        return action.move_to_element(element_locator).perform()
 
     def hidden_user2_txt(self):
         return self.find_element(dl.hidden_user2_txt).text
 
     def move_to_hover_3(self):
         action = ActionChains(self.driver)
-        elementLocator = self.find_element(dl.hover_3)
-        return action.move_to_element(elementLocator).perform()
+        element_locator = self.find_element(dl.hover_3)
+        return action.move_to_element(element_locator).perform()
 
     def hidden_user3_txt(self):
         return self.find_element(dl.hidden_user3_txt).text

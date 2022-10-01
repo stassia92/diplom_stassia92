@@ -4,6 +4,9 @@ import requests
 
 
 class DiplomPage4(BasePage):
+    def __init__(self, driver):
+        super().__init__(driver)
+        self.driver = driver
 
     def open(self):
         return self.driver.get('https://the-internet.herokuapp.com/')
@@ -14,8 +17,8 @@ class DiplomPage4(BasePage):
 
     @staticmethod
     def code_200_check():
-        r = requests.get('https://the-internet.herokuapp.com/status_codes/200')
-        return r.status_code == 200
+        request = requests.get('https://the-internet.herokuapp.com/status_codes/200')
+        return request.status_code == 200
 
     def status_code_301_example(self):
         self.find_element(dl.status_code_examples).click()
@@ -23,8 +26,8 @@ class DiplomPage4(BasePage):
 
     @staticmethod
     def code_301_check():
-        r = requests.get('https://the-internet.herokuapp.com/status_codes/301')
-        return r.status_code == 301
+        request = requests.get('https://the-internet.herokuapp.com/status_codes/301')
+        return request.status_code == 301
 
     def status_code_404_example(self):
         self.find_element(dl.status_code_examples).click()
@@ -32,8 +35,8 @@ class DiplomPage4(BasePage):
 
     @staticmethod
     def code_404_check():
-        r = requests.get('https://the-internet.herokuapp.com/status_codes/404')
-        return r.status_code == 404
+        request = requests.get('https://the-internet.herokuapp.com/status_codes/404')
+        return request.status_code == 404
 
     def status_code_500_example(self):
         self.find_element(dl.status_code_examples).click()
@@ -41,8 +44,8 @@ class DiplomPage4(BasePage):
 
     @staticmethod
     def code_500_check():
-        r = requests.get('https://the-internet.herokuapp.com/status_codes/500')
-        return r.status_code == 500
+        request = requests.get('https://the-internet.herokuapp.com/status_codes/500')
+        return request.status_code == 500
 
     def frames_examples(self):
         self.find_element(dl.frames_example).click()
@@ -77,11 +80,3 @@ class DiplomPage4(BasePage):
     def left_frame(self):
         self.driver.switch_to.frame("frame-top")
         return self.driver.switch_to.frame('frame-left')
-
-    def middle_frame(self):
-        self.driver.switch_to.frame("frame-top")
-        return self.driver.switch_to.frame('frame-middle')
-
-    def right_frame(self):
-        self.driver.switch_to.frame("frame-top")
-        return self.driver.switch_to.frame('frame-right')

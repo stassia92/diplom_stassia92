@@ -5,6 +5,7 @@ from diploma.pom.pages.diplom_page import DiplomPage
 from diploma.pom.pages.diplom_page2 import DiplomPage2
 from diploma.pom.pages.diplom_page3 import DiplomPage3
 from diploma.pom.pages.diplom_page4 import DiplomPage4
+from diploma.pom.pages.diplom_page5 import DiplomPage5
 
 
 @allure.suite('Заголовок сайта')
@@ -534,6 +535,7 @@ def test_37_nested_frame_bottom(driver):
         diplom_page.frames_examples()
     with allure.step('Открытие примера Nested Frames '):
         diplom_page.nested_frames_examples()
+        diplom_page = DiplomPage5(driver)
     with allure.step('Переключение на nested frame middle'):
         diplom_page.middle_frame()
     assert 'MIDDLE' in diplom_page.nested_frame_txt()
@@ -551,6 +553,7 @@ def test_38_nested_frame_bottom(driver):
         diplom_page.frames_examples()
     with allure.step('Открытие примера Nested Frames '):
         diplom_page.nested_frames_examples()
+        diplom_page = DiplomPage5(driver)
     with allure.step('Переключение на nested frame right'):
         diplom_page.right_frame()
     assert 'RIGHT' in diplom_page.nested_frame_txt()

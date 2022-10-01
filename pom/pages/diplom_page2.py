@@ -1,6 +1,6 @@
 from selenium.webdriver.support.select import Select
-from diplom_stassia92.pom.pages.base_page import BasePage
-from diplom_stassia92.pom.pages.locators import diplom_locators as dl
+from diploma.pom.pages.base_page import BasePage
+from diploma.pom.pages.locators import diplom_locators as dl
 
 
 class DiplomPage2(BasePage):
@@ -32,12 +32,6 @@ class DiplomPage2(BasePage):
     def option_2_txt_exist_on_page(self):
         return self.find_element(dl.option_2_txt_on_page).text
 
-    # def context_menu_click(self):
-    #     return self.find_element(dl.context_menu).click()
-    #
-    # def right_click_spot(self):
-    #     return self.find_element(dl.right_click_spot).send_keys(Keys.SHIFT+Keys.F10)
-
     def form_authentication_click(self):
         return self.find_element(dl.form_authentication).click()
 
@@ -62,27 +56,6 @@ class DiplomPage2(BasePage):
 
     def login_success_txt(self):
         return self.find_element(dl.login_success).text
-
-    # def drag_and_drop_click(self):
-    #     return self.find_element(dl.drag_and_drop_example).click()
-
-    # def drag_and_drop(self):
-    #     source_element = self.driver.find_element(dl.a_example)
-    #     target_element = self.driver.find_element(dl.b_example)
-    #     action = ActionChains(self.driver)
-    #     action.drag_and_drop(source_element, target_element)
-    #     return action.perform()
-    #
-    # def download_file(self):
-    #     self.find_element(dl.download_file).click()
-    #     return self.find_element(dl.example_download).click()
-    #
-    # def file_check(self):
-    #     self.file = Path('test.txt')
-    #     if self.file.exists():
-    #         print("True")
-    #     else:
-    #         print("False")
 
     def entry_ad(self):
         return self.find_element(dl.entry_ad).click()

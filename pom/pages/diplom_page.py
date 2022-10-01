@@ -1,5 +1,5 @@
-from diplom_stassia92.pom.pages.base_page import BasePage
-from diplom_stassia92.pom.pages.locators import diplom_locators as dl
+from diploma.pom.pages.base_page import BasePage
+from diploma.pom.pages.locators import diplom_locators as dl
 
 
 class DiplomPage(BasePage):
@@ -22,8 +22,8 @@ class DiplomPage(BasePage):
     def open_ab_testing_page(self):
         return self.find_element(dl.ab_testing_page).click()
 
-    def ab_test_var_1_header_txt(self):
-        return self.find_element(dl.ab_test_var_1_header).text
+    def ab_test_var_1_header_is_displayed(self):
+        return self.find_element(dl.ab_test_var_1_header).is_displayed()
 
     def url_check(self):
         return self.driver.current_url
@@ -49,7 +49,10 @@ class DiplomPage(BasePage):
     def remove_btn_click(self):
         return self.find_element(dl.del_element_btn).click()
 
-    def element_visible(self):
+    def element_delete_is_displayed(self):
+        return self.find_element(dl.elements).is_displayed()
+
+    def element_delete_visible(self):
         return self.find_element(dl.elements).is_selected()
 
     def checkboxes_example_click(self):

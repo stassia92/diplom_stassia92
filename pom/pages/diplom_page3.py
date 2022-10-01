@@ -1,5 +1,6 @@
-from diplom_stassia92.pom.pages.base_page import BasePage
-from diplom_stassia92.pom.pages.locators import diplom_locators as dl
+from diploma.pom.pages.base_page import BasePage
+from diploma.pom.pages.locators import diplom_locators as dl
+from selenium.webdriver.common.action_chains import ActionChains
 
 
 class DiplomPage3(BasePage):
@@ -35,15 +36,43 @@ class DiplomPage3(BasePage):
         self.find_element(dl.dynamic_controls).click()
         return self.find_element(dl.enable_disable_btn).click()
 
-# def status_code_click(self):
-#     self.find_element(dl.status_code_example).click()
-#     return self.find_element(dl.code_200_example).click()
-#
-# def status_code_200(self):
-#     status_200 = self.find_element(dl.code_200)
-#     link_200 = status_200.get_attribute('href')
-#     r = api.get(link_200)
-#     if r.status_code == 200:
-#         return True
-#     else:
-#         return False
+    def dinamic_ctrl_disable(self):
+        return self.find_element(dl.enable_disable_btn).click()
+
+    def context_menu_example(self):
+        return self.find_element(dl.context_menu).click()
+
+    def context_menu(self):
+        actionChains = ActionChains(self.driver)
+        elementLocator = self.find_element(dl.right_click_spot)
+        return actionChains.context_click(elementLocator).perform()
+
+    def alert_txt(self):
+        return self.driver.switch_to.alert.text
+
+    def hovers_open_page(self):
+        return self.find_element(dl.hovers_page).click()
+
+    def move_to_hover_1(self):
+        action = ActionChains(self.driver)
+        elementLocator = self.find_element(dl.hover_1)
+        return action.move_to_element(elementLocator).perform()
+
+    def hidden_user1_txt(self):
+        return self.find_element(dl.hidden_user1_txt).text
+
+    def move_to_hover_2(self):
+        action = ActionChains(self.driver)
+        elementLocator = self.find_element(dl.hover_2)
+        return action.move_to_element(elementLocator).perform()
+
+    def hidden_user2_txt(self):
+        return self.find_element(dl.hidden_user2_txt).text
+
+    def move_to_hover_3(self):
+        action = ActionChains(self.driver)
+        elementLocator = self.find_element(dl.hover_3)
+        return action.move_to_element(elementLocator).perform()
+
+    def hidden_user3_txt(self):
+        return self.find_element(dl.hidden_user3_txt).text

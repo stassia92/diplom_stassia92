@@ -1,16 +1,17 @@
 from time import sleep
 import pytest
 import allure
-from diplom_stassia92.pom.pages.diplom_page import DiplomPage
-from diplom_stassia92.pom.pages.diplom_page2 import DiplomPage2
-from diplom_stassia92.pom.pages.diplom_page3 import DiplomPage3
+from diploma.pom.pages.diplom_page import DiplomPage
+from diploma.pom.pages.diplom_page2 import DiplomPage2
+from diploma.pom.pages.diplom_page3 import DiplomPage3
+from diploma.pom.pages.diplom_page4 import DiplomPage4
 
 
 @allure.suite('Заголовок сайта')
 @allure.feature('Проверка корректности заголовка сайта')
 @pytest.mark.usefixtures('print_text', 'text_inside_test')
 @pytest.mark.diplom
-def test_1_check_of_header_website(driver):
+def test_1_check_header_of_website(driver):
     with allure.step('Открытие главной страницы сайта'):
         diplom_page = DiplomPage(driver)
         diplom_page.open()
@@ -37,23 +38,10 @@ def test_3_check_footer_main_page_of_website(driver):
         assert "Powered by Elemental Selenium" in diplom_page.main_page_footer_txt()
 
 
-@allure.suite('Открытие новой страницы')
-@allure.feature('Проверка перехода на другую страницу сайта')
-@pytest.mark.usefixtures('text_inside_test')
-@pytest.mark.diplom
-def test_4_check_open_new_page(driver):
-    with allure.step('Открытие главной страницы сайта'):
-        diplom_page = DiplomPage(driver)
-        diplom_page.open()
-    with allure.step('Переход на страницу A/B Testing'):
-        diplom_page.open_ab_testing_page()
-        assert diplom_page.url_check() == "https://the-internet.herokuapp.com/abtest"
-
-
 @allure.suite('Отображение кнопки перехода на гитхаб')
 @allure.feature('Проверка отображения кнопки перехода на гитхаб автора сайта')
 @pytest.mark.usefixtures('text_inside_test')
-def test_5_check_github_btn_is_displayed(driver):
+def test_4_check_github_btn_is_displayed(driver):
     with allure.step('Открытие главной страницы сайта'):
         diplom_page = DiplomPage(driver)
         diplom_page.open()
@@ -63,42 +51,52 @@ def test_5_check_github_btn_is_displayed(driver):
 @allure.suite('Переход на страницу гитхаб')
 @allure.feature('Проверка перехода на гитхаб автора сайта')
 @pytest.mark.usefixtures('text_inside_test')
-def test_6_check_github_btn_transfer_to_github(driver):
+def test_5_check_github_btn_transfer_to_github(driver):
     with allure.step('Открытие главной страницы сайта'):
         diplom_page = DiplomPage(driver)
         diplom_page.open()
     with allure.step('Нажатие кнопки перехода на гитхаб автора'):
         diplom_page.github_btn_click()
         assert diplom_page.url_check() == "https://github.com/saucelabs/the-internet" and \
-               diplom_page.github_author_name_is_displayed() is True
+               diplom_page.github_author_name_is_displayed()
 
 
 @allure.suite('Наличие картинки на кнопке перехода на гитхаб')
 @allure.feature('Проверка отображения изображения на кнопке перехода на гитхаб')
 @pytest.mark.usefixtures('text_inside_test')
-def test_7_check_github_btn_image(driver):
+def test_6_check_github_btn_image(driver):
     with allure.step('Открытие главной страницы сайта'):
         diplom_page = DiplomPage(driver)
         diplom_page.open()
         assert diplom_page.github_btn_image_exist()
 
 
-@allure.suite('Добавление и удаление элемента')
-@allure.feature('Проверка добавления и удаления элемента на странице')
+@allure.suite('Добавление элемента')
+@allure.feature('Проверка добавления элемента на странице')
 @pytest.mark.usefixtures('text_inside_test')
-def test_8_add_remove_elements(driver):
+@pytest.mark.diplom
+def test_7_add_element(driver):
     with allure.step('Открытие главной страницы сайта'):
         diplom_page = DiplomPage(driver)
         diplom_page.open()
-        with allure.step('Переход на страницу примера добавления и удаления элемента'):
+        with allure.step('Переход на страницу примера добавления и удаления элементов'):
+            diplom_page.open_add_remove_example()
+        with allure.step('Добавление элемента на странице'):
+            diplom_page.add_element_btn_click()
+        assert diplom_page.element_delete_is_displayed()
+
+
+def test_8_delete_element(driver):
+    with allure.step('Открытие главной страницы сайта'):
+        diplom_page = DiplomPage(driver)
+        diplom_page.open()
+        with allure.step('Переход на страницу примера добавления и удаления элементов'):
             diplom_page.open_add_remove_example()
         with allure.step('Добавление элемента на странице'):
             diplom_page.add_element_btn_click()
         with allure.step('Удаление элемента на странице'):
             diplom_page.remove_btn_click()
-        with allure.step('Проверка отображения кнопки Delete'):
-            diplom_page.element_visible()
-        assert diplom_page.element_visible() is False
+        assert diplom_page.element_delete_visible() is False
 
 
 @allure.suite('Простая авторизация')
@@ -133,6 +131,7 @@ def test_10_turn_off_checkbox_2(driver):
 @allure.suite('Включение всех чекбоксов')
 @allure.feature('Проверка включения всех чекбоксов на странице сайта')
 @pytest.mark.usefixtures('text_inside_test')
+@pytest.mark.diplom
 def test_11_turn_on_all_checkboxes(driver):
     with allure.step('Открытие главной страницы сайта'):
         diplom_page = DiplomPage(driver)
@@ -145,7 +144,7 @@ def test_11_turn_on_all_checkboxes(driver):
         diplom_page.checkbox_1_()
     with allure.step('Включение чекбокса №2'):
         diplom_page.checkbox_2_()
-    assert diplom_page.checkbox_1_selected() and diplom_page.checkbox_2_selected() is True
+    assert diplom_page.checkbox_1_selected() and diplom_page.checkbox_2_selected()
 
 
 @allure.suite('Выключение чекбокса №1')
@@ -166,22 +165,10 @@ def test_12_turn_off_checkbox_1(driver):
     assert diplom_page.checkbox_1_selected() is False
 
 
-# @allure.suite('Выключение чекбокса №1')
-# @allure.feature('Проверка включения всех чекбоксов на странице сайта')
-# @pytest.mark.usefixtures('text_inside_test')
-# def test_13_drag_and_drop(driver):
-#     with allure.step('Открытие главной страницы сайта'):
-#         diplom_page = DiplomPage2(driver)
-#         diplom_page.open()
-#     with allure.step('Открытие страницы примера c drag and drop'):
-#         diplom_page.drag_and_drop_click()
-#         diplom_page.drag_and_drop()
-#         sleep(3)
-
-
 @allure.suite('Выбор option 1 из списка')
 @allure.feature('Проверка на выбор option 1 из списка ')
 @pytest.mark.usefixtures('text_inside_test')
+@pytest.mark.diplom
 def test_13_dropdown_1(driver):
     with allure.step('Открытие главной страницы сайта'):
         diplom_page = DiplomPage2(driver)
@@ -207,36 +194,11 @@ def test_14_dropdown_2(driver):
     assert "Option 2" in diplom_page.option_2_txt_exist_on_page()
 
 
-# @allure.suite('Выбор option 2 из списка')
-# @allure.feature('Проверка на выбор option 2 из списка ')
-# @pytest.mark.usefixtures('text_inside_test')
-# def test_15_сontext_menu(driver):
-#     with allure.step('Открытие главной страницы сайта'):
-#         diplom_page = DiplomPage(driver)
-#         diplom_page.open()
-#         diplom_page.context_menu_click()
-#         diplom_page.right_click_spot()
-#         sleep(3)
-
-
-@allure.suite('Выбор option 2 из списка')
-@allure.feature('Проверка на выбор option 2 из списка ')
-@pytest.mark.usefixtures('text_inside_test')
-def test_15_dropdown_2(driver):
-    with allure.step('Открытие главной страницы сайта'):
-        diplom_page = DiplomPage2(driver)
-        diplom_page.open()
-    with allure.step('Открытие страницы с примером dropdown'):
-        diplom_page.dropdown_click()
-    with allure.step('Выбор option 1 из списка'):
-        diplom_page.dropdown_2_on()
-    assert "Option 2" in diplom_page.option_2_txt_exist_on_page()
-
-
 @allure.suite('Авторизация')
 @allure.feature('Проверка авторизации на странице')
 @pytest.mark.usefixtures('text_inside_test')
-def test_16_form_authentication_success(driver):
+@pytest.mark.diplom
+def test_15_form_authentication_success(driver):
     with allure.step('Открытие главной страницы сайта'):
         diplom_page = DiplomPage2(driver)
         diplom_page.open()
@@ -254,7 +216,7 @@ def test_16_form_authentication_success(driver):
 @allure.suite('Авторизации с ошибкой в username')
 @allure.feature('Проверка авторизации c ошибкой в username')
 @pytest.mark.usefixtures('text_inside_test')
-def test_17_form_authentication_wrong_username(driver):
+def test_16_form_authentication_wrong_username(driver):
     with allure.step('Открытие главной страницы сайта'):
         diplom_page = DiplomPage2(driver)
         diplom_page.open()
@@ -272,7 +234,7 @@ def test_17_form_authentication_wrong_username(driver):
 @allure.suite('Авторизации с ошибкой в password')
 @allure.feature('Проверка авторизации c ошибкой в password')
 @pytest.mark.usefixtures('text_inside_test')
-def test_18_form_authentication_wrong_password(driver):
+def test_17_form_authentication_wrong_password(driver):
     with allure.step('Открытие главной страницы сайта'):
         diplom_page = DiplomPage2(driver)
         diplom_page.open()
@@ -287,11 +249,10 @@ def test_18_form_authentication_wrong_password(driver):
     assert "Your password is invalid!" in diplom_page.login_success_txt()
 
 
-# sleep
 @allure.suite('Всплывающая реклама')
 @allure.feature('Проверка на выключение всплывающей рекламы')
 @pytest.mark.usefixtures('text_inside_test')
-def test_19_entry_ad(driver):
+def test_18_entry_ad(driver):
     with allure.step('Открытие главной страницы сайта'):
         diplom_page = DiplomPage2(driver)
         diplom_page.open()
@@ -299,26 +260,15 @@ def test_19_entry_ad(driver):
         diplom_page.entry_ad()
     with allure.step('Выключение всплывающей рекламы'):
         diplom_page.close_entry_ad()
-        sleep(3)
+        sleep(7)
     assert diplom_page.ad_window_is_displayed() is False
-
-
-# @allure.suite('Авторизации с ошибкой в password')
-# @allure.feature('Проверка авторизации c ошибкой в password')
-# @pytest.mark.usefixtures('text_inside_test')
-# def test_18_form_authentication_wrong_password(driver):
-#     with allure.step('Открытие главной страницы сайта'):
-#         diplom_page = DiplomPage2(driver)
-#         diplom_page.open()
-#         diplom_page.download_file()
-#         sleep(5)
-#         assert DiplomPage2.file_check() is "True"
 
 
 @allure.suite('Добавление файла')
 @allure.feature('Проверка добавления файла на страницу')
 @pytest.mark.usefixtures('text_inside_test')
-def test_20_file_uploader(driver):
+@pytest.mark.diplom
+def test_19_file_uploader(driver):
     with allure.step('Открытие главной страницы сайта'):
         diplom_page = DiplomPage2(driver)
         diplom_page.open()
@@ -333,7 +283,7 @@ def test_20_file_uploader(driver):
 @allure.suite('Отправление данных без файла')
 @allure.feature('Проверка отправления пустых данных')
 @pytest.mark.usefixtures('text_inside_test')
-def test_21_file_uploader(driver):
+def test_20_file_uploader(driver):
     with allure.step('Открытие главной страницы сайта'):
         diplom_page = DiplomPage2(driver)
         diplom_page.open()
@@ -348,7 +298,7 @@ def test_21_file_uploader(driver):
 @allure.suite('Динамическая кнопка удаления чекбокса')
 @allure.feature('Проверка удаления чекбокса со страницы - динамической кнопкой')
 @pytest.mark.usefixtures('text_inside_test')
-def test_22_dynamic_ctrl_remove_checkbox(driver):
+def test_21_dynamic_ctrl_remove_checkbox(driver):
     with allure.step('Открытие главной страницы сайта'):
         diplom_page = DiplomPage3(driver)
         diplom_page.open()
@@ -357,11 +307,10 @@ def test_22_dynamic_ctrl_remove_checkbox(driver):
     assert "It's gone!" in diplom_page.message_txt()
 
 
-# sleep
 @allure.suite('Динамическая кнопка добавления чекбокса')
 @allure.feature('Проверка добавления чекбокса со страницы - динамической кнопкой')
 @pytest.mark.usefixtures('text_inside_test')
-def test_23_dynamic_ctrl_remove_checkbox(driver):
+def test_22_dynamic_ctrl_remove_checkbox(driver):
     with allure.step('Открытие главной страницы сайта'):
         diplom_page = DiplomPage3(driver)
         diplom_page.open()
@@ -375,7 +324,7 @@ def test_23_dynamic_ctrl_remove_checkbox(driver):
 @allure.suite('Динамическая кнопка включения')
 @allure.feature('Проверка включения динамической кнопки')
 @pytest.mark.usefixtures('text_inside_test')
-def test_24_dynamic_ctrl_enable_btn(driver):
+def test_23_dynamic_ctrl_enable_btn(driver):
     with allure.step('Открытие главной страницы сайта'):
         diplom_page = DiplomPage3(driver)
         diplom_page.open()
@@ -387,23 +336,221 @@ def test_24_dynamic_ctrl_enable_btn(driver):
 @allure.suite('Динамическая кнопка выключения')
 @allure.feature('Проверка выключения динамической кнопки')
 @pytest.mark.usefixtures('text_inside_test')
-def test_25_dynamic_ctrl_disable_btn(driver):
+def test_24_dynamic_ctrl_disable_btn(driver):
     with allure.step('Открытие главной страницы сайта'):
         diplom_page = DiplomPage3(driver)
         diplom_page.open()
-    with allure.step('Открытие примера с Dinamic controls и нажатие кнопки Disable'):
+    with allure.step('Открытие примера с Dinamic controls и нажатие кнопки Enable'):
         diplom_page.dinamic_ctrl_enable()
+        sleep(3)
+    with allure.step('Нажатие кнопки Disable'):
+        diplom_page.dinamic_ctrl_disable()
     assert "It's disabled!" in diplom_page.message_txt()
 
-# @allure.suite('Динамическая кнопка выключения')
-# @allure.feature('Проверка выключения динамической кнопки')
-# @pytest.mark.usefixtures('text_inside_test')
-# def test_25_dynamic_ctrl_disable_btn(driver):
-#     with allure.step('Открытие главной страницы сайта'):
-#         diplom_page = DiplomPage2(driver)
-#         diplom_page.open()
-#     with allure.step('Открытие примера с Dinamic controls и нажатие кнопки Disable'):
-#         diplom_page.status_code_click()
-#         diplom_page.status_code_200()
-#         sleep(3)
-#     assert diplom_page.status_code_200() is True
+
+@allure.suite('Контекстное меню')
+@allure.feature('Проверка на появление алерта после вызова контекстного меню ')
+@pytest.mark.usefixtures('text_inside_test')
+def test_25_context_menu(driver):
+    with allure.step('Открытие главной страницы сайта'):
+        diplom_page = DiplomPage3(driver)
+        diplom_page.open()
+        with allure.step('Открытие примера с Context Menu'):
+            diplom_page.context_menu_example()
+        with allure.step('Вызов контекстного меню с подтверждающим алертом'):
+            diplom_page.context_menu()
+    assert 'You selected a context menu' in diplom_page.alert_txt()
+
+
+@allure.suite('Hover 1')
+@allure.feature('Проверка наведения курсора на фото получение инфо о нем ')
+@pytest.mark.usefixtures('text_inside_test')
+@pytest.mark.diplom
+def test_26_hover_1(driver):
+    with allure.step('Открытие главной страницы сайта'):
+        diplom_page = DiplomPage3(driver)
+        diplom_page.open()
+    with allure.step('Открытие открытие примера Hovers'):
+        diplom_page.hovers_open_page()
+    with allure.step('Наведение курсора на изображение слева и получение инфо о нем'):
+        diplom_page.move_to_hover_1()
+    assert 'name: user1' in diplom_page.hidden_user1_txt()
+
+
+@allure.suite('Hover 2')
+@allure.feature('Проверка наведения курсора на фото получение инфо о нем ')
+@pytest.mark.usefixtures('text_inside_test')
+def test_27_hover_2(driver):
+    with allure.step('Открытие главной страницы сайта'):
+        diplom_page = DiplomPage3(driver)
+        diplom_page.open()
+    with allure.step('Открытие открытие примера Hovers'):
+        diplom_page.hovers_open_page()
+    with allure.step('Наведение курсора на изображение в центре и получение инфо о нем'):
+        diplom_page.move_to_hover_2()
+    assert 'name: user2' in diplom_page.hidden_user2_txt()
+
+
+@allure.suite('Hover 3')
+@allure.feature('Проверка наведения курсора на фото получение инфо о нем ')
+@pytest.mark.usefixtures('text_inside_test')
+def test_28_hover_3(driver):
+    with allure.step('Открытие главной страницы сайта'):
+        diplom_page = DiplomPage3(driver)
+        diplom_page.open()
+    with allure.step('Открытие открытие примера Hovers'):
+        diplom_page.hovers_open_page()
+    with allure.step('Наведение курсора на изображение справа и получение инфо о нем'):
+        diplom_page.move_to_hover_3()
+    assert 'name: user3' in diplom_page.hidden_user3_txt()
+
+
+@allure.suite('Status code 200')
+@allure.feature('Проверка что страница возвращает status code 200 ')
+@pytest.mark.usefixtures('text_inside_test')
+@pytest.mark.diplom
+def test_29_status_code_200(driver):
+    with allure.step('Открытие главной страницы сайта'):
+        diplom_page = DiplomPage4(driver)
+        diplom_page.open()
+    with allure.step('Открытие примера Status code 200'):
+        diplom_page.status_code_200_example()
+    assert diplom_page.code_200_check()
+
+
+@allure.suite('Status code 301')
+@allure.feature('Проверка что страница возвращает status code 301 ')
+@pytest.mark.usefixtures('text_inside_test')
+def test_30_status_code_301(driver):
+    with allure.step('Открытие главной страницы сайта'):
+        diplom_page = DiplomPage4(driver)
+        diplom_page.open()
+    with allure.step('Открытие примера Status code 301'):
+        diplom_page.status_code_301_example()
+    assert diplom_page.code_301_check()
+
+
+@allure.suite('Status code 404')
+@allure.feature('Проверка что страница возвращает status code 404 ')
+@pytest.mark.usefixtures('text_inside_test')
+def test_31_status_code_404(driver):
+    with allure.step('Открытие главной страницы сайта'):
+        diplom_page = DiplomPage4(driver)
+        diplom_page.open()
+    with allure.step('Открытие примера Status code 404'):
+        diplom_page.status_code_404_example()
+    assert diplom_page.code_404_check()
+
+
+@allure.suite('Status code 500')
+@allure.feature('Проверка что страница возвращает status code 500 ')
+@pytest.mark.usefixtures('text_inside_test')
+def test_32_status_code_500(driver):
+    with allure.step('Открытие главной страницы сайта'):
+        diplom_page = DiplomPage4(driver)
+        diplom_page.open()
+    with allure.step('Открытие примера Status code 500'):
+        diplom_page.status_code_500_example()
+    assert diplom_page.code_500_check()
+
+
+@allure.suite('Frame iframe')
+@allure.feature('Проверка перехода на iframe и отображения старого текста на странице  ')
+@pytest.mark.usefixtures('text_inside_test')
+@pytest.mark.diplom
+def test_33_iframe_check_old_txt(driver):
+    with allure.step('Открытие главной страницы сайта'):
+        diplom_page = DiplomPage4(driver)
+        diplom_page.open()
+    with allure.step('Открытие примера с Frames '):
+        diplom_page.frames_examples()
+    with allure.step('Открытие примера с iframe'):
+        diplom_page.iframe_example()
+    with allure.step('Переключение на iframe'):
+        diplom_page.switch_to_iframe()
+    assert diplom_page.old_txt_iframe_txt() == 'Your content goes here.'
+
+
+@allure.suite('Frame iframe')
+@allure.feature('Изменение текста в iframe и проверка на несовпадение нового текста со старым ')
+@pytest.mark.usefixtures('text_inside_test')
+def test_34_iframe_chech_new_txt(driver):
+    with allure.step('Открытие главной страницы сайта'):
+        diplom_page = DiplomPage4(driver)
+        diplom_page.open()
+    with allure.step('Открытие примера с Frames '):
+        diplom_page.frames_examples()
+    with allure.step('Открытие примера с iframe'):
+        diplom_page.iframe_example()
+    with allure.step('Переключение на iframe'):
+        diplom_page.switch_to_iframe()
+    with allure.step('Очищение формы с текстом'):
+        diplom_page.clear_iframe_form()
+    with allure.step('Вписывание нового текста Hello world'):
+        diplom_page.change_txt_iframe()
+    assert diplom_page.new_txt_iframe_txt() != 'Your content goes here.'
+
+
+@allure.suite('Nested frame bottom ')
+@allure.feature('Переход на nested frame bottom и проверка текста внутри него')
+@pytest.mark.usefixtures('text_inside_test')
+def test_35_nested_frame_bottom(driver):
+    with allure.step('Открытие главной страницы сайта'):
+        diplom_page = DiplomPage4(driver)
+        diplom_page.open()
+    with allure.step('Открытие примера Frames '):
+        diplom_page.frames_examples()
+    with allure.step('Открытие примера Nested Frames '):
+        diplom_page.nested_frames_examples()
+    with allure.step('Переключение на nested frame bottom'):
+        diplom_page.bottom_frame()
+    assert 'BOTTOM' in diplom_page.nested_frame_txt()
+
+
+@allure.suite('Nested frame left')
+@allure.feature('Переход на nested frame left и проверка текста внутри него')
+@pytest.mark.usefixtures('text_inside_test')
+def test_36_nested_frame_bottom(driver):
+    with allure.step('Открытие главной страницы сайта'):
+        diplom_page = DiplomPage4(driver)
+        diplom_page.open()
+    with allure.step('Открытие примера Frames '):
+        diplom_page.frames_examples()
+    with allure.step('Открытие примера Nested Frames '):
+        diplom_page.nested_frames_examples()
+    with allure.step('Переключение на nested frame left'):
+        diplom_page.left_frame()
+    assert 'LEFT' in diplom_page.nested_frame_txt()
+
+
+@allure.suite('Nested frame middle')
+@allure.feature('Переход на nested frame middle и проверка текста внутри него')
+@pytest.mark.usefixtures('text_inside_test')
+def test_37_nested_frame_bottom(driver):
+    with allure.step('Открытие главной страницы сайта'):
+        diplom_page = DiplomPage4(driver)
+        diplom_page.open()
+    with allure.step('Открытие примера Frames '):
+        diplom_page.frames_examples()
+    with allure.step('Открытие примера Nested Frames '):
+        diplom_page.nested_frames_examples()
+    with allure.step('Переключение на nested frame middle'):
+        diplom_page.middle_frame()
+    assert 'MIDDLE' in diplom_page.nested_frame_txt()
+
+
+@allure.suite('Nested frame right')
+@allure.feature('Переход на nested frame right и проверка текста внутри него')
+@pytest.mark.usefixtures('text_inside_test')
+@pytest.mark.diplom
+def test_38_nested_frame_bottom(driver):
+    with allure.step('Открытие главной страницы сайта'):
+        diplom_page = DiplomPage4(driver)
+        diplom_page.open()
+    with allure.step('Открытие примера Frames '):
+        diplom_page.frames_examples()
+    with allure.step('Открытие примера Nested Frames '):
+        diplom_page.nested_frames_examples()
+    with allure.step('Переключение на nested frame right'):
+        diplom_page.right_frame()
+    assert 'RIGHT' in diplom_page.nested_frame_txt()

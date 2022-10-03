@@ -12,7 +12,7 @@ class DiplomPage3(BasePage):
         return self.driver.get('https://the-internet.herokuapp.com/')
 
     def choose_file_upload(self):
-        self.find_element(dl.choose_file).send_keys('D:/diplom/puppy_and_kitty.jpg')
+        self.find_element(dl.choose_file).send_keys('D:\diplom2022\diploma\puppy_and_kitty.jpg')
         return self.find_element(dl.upload_btn).click()
 
     def upl_btn_click(self):

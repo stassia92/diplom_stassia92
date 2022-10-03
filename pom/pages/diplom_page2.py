@@ -59,3 +59,14 @@ class DiplomPage2(BasePage):
 
     def upload_file_click(self):
         return self.find_element(dl.file_upload).click()
+
+    def middle_frame(self):
+        self.driver.switch_to.frame("frame-top")
+        return self.driver.switch_to.frame('frame-middle')
+
+    def right_frame(self):
+        self.driver.switch_to.frame("frame-top")
+        return self.driver.switch_to.frame('frame-right')
+
+    def nested_frame_txt(self):
+        return self.find_element(dl.frames_body).text

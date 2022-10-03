@@ -19,9 +19,6 @@ class DiplomPage(BasePage):
     def main_page_footer_txt(self):
         return self.find_element(dl.main_page_footer).text
 
-    def ab_test_var_1_header_is_displayed(self):
-        return self.find_element(dl.ab_test_var_1_header).is_displayed()
-
     def url_check(self):
         return self.driver.current_url
 

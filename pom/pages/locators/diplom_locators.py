@@ -3,8 +3,6 @@ from selenium.webdriver.common.by import By
 header_web = (By.CSS_SELECTOR, '#content > h1')
 header_examples = (By.CSS_SELECTOR, '#content > h2')
 main_page_footer = (By.CSS_SELECTOR, '#page-footer > div > div')
-ab_testing_page = (By.CSS_SELECTOR, '#content > ul > li:nth-child(1) > a')
-ab_test_var_1_header = (By.CSS_SELECTOR, '#content > div > h3')
 github_btn = (By.CSS_SELECTOR, 'body > div:nth-child(2) > a > img')
 github_name = (By.CSS_SELECTOR, '#repository-container-header > '
                                 'div.d-flex.flex-wrap.flex-justify-end.mb-3.px-3.px-md-4.px-lg-5 >'

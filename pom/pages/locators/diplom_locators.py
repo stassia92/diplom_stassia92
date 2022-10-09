@@ -57,4 +57,3 @@ nested_frame_example = (By.LINK_TEXT, 'Nested Frames')
 frame_bottom = (By.NAME, 'frame-bottom')
 frames_body = (By.XPATH, "//body")
 text_frame = (By.CSS_SELECTOR, '#tinymce > p')
-

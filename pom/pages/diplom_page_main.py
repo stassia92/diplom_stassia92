@@ -130,7 +130,7 @@ class DiplomPageMain(BasePage):
         return self.find_element(dl.frames_body).text
 
     def choose_file_upload(self):
-        self.find_element(dl.choose_file).send_keys(r'D:\diplom2022\diploma\test_data\puppy_and_kitty.jpg')
+        self.find_element(dl.choose_file).send_keys(r'D:\diplom2022\diploma\test_data\lovely.jpg')
         return self.find_element(dl.upload_btn).click()
 
     def upl_btn_click(self):

@@ -150,7 +150,7 @@ def test_11_turn_on_all_checkboxes(driver):
 
 
 @allure.suite('Выключение чекбокса №1')
-@allure.feature('Проверка включения всех чекбоксов на странице сайта')
+@allure.feature('Проверка выключенного чекбокса №1')
 @pytest.mark.usefixtures('text_inside_test')
 def test_12_turn_off_checkbox_1(driver):
     with allure.step('Открытие главной страницы сайта'):

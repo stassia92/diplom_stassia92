@@ -85,7 +85,9 @@ def test_7_add_element(driver):
             diplom_page.add_element_btn_click()
         assert diplom_page.element_delete_is_displayed()
 
-
+@allure.suite('Удаление элемента')
+@allure.feature('Проверка удаления элемента на странице')
+@pytest.mark.usefixtures('text_inside_test')
 def test_8_delete_element(driver):
     with allure.step('Открытие главной страницы сайта'):
         diplom_page = DiplomPage(driver)

@@ -19,7 +19,7 @@ def text_inside_test():
 
 @pytest.fixture(scope='function')
 def driver():
-    serv = Service(executable_path=(r'D:\dz1\prog\chromedriver.exe')
+    serv = Service(executable_path=r'D:\cd\chromedriver.exe')
     driver_chrome = webdriver.Chrome(service=serv)
     driver_chrome.maximize_window()
     driver_chrome.implicitly_wait(10)

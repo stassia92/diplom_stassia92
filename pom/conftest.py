@@ -3,13 +3,6 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 
 
-@pytest.fixture(scope='session')
-def print_text():
-    print('\nTesting loading\n')
-    yield None
-    print('\nEnd!\n')
-
-
 @pytest.fixture(scope='function')
 def text_inside_test():
     print('\nНачало проверки теста\n')

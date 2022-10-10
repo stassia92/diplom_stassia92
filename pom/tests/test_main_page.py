@@ -5,7 +5,7 @@ from diploma.pom.pages.diplom_page_main import DiplomPageMain
 
 @allure.suite('Заголовок сайта')
 @allure.feature('Проверка корректности заголовка сайта')
-@pytest.mark.usefixtures('print_text', 'text_inside_test')
+@pytest.mark.usefixtures('text_inside_test')
 @pytest.mark.diplom
 def test_1_check_header_of_website(driver):
     with allure.step('Открытие главной страницы сайта'):
